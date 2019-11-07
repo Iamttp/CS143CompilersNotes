@@ -4,7 +4,7 @@ youtube : `https://www.youtube.com/watch?v=54bo1qaHAfk&list=PLkB3phqR3X43IRqPT0t
 
 这是一个youtube上介绍lex/yacc的视频，讲的超级的好，对于CS143的任务1，我又有了信心。这一篇文章是上面视频的总结和记录，我尽量写得详细点，但是强烈推荐去看看。
 
-如果你给我说不能翻墙，那我只能说，国内搜索引擎都什么呀！有个B站UP主叫LEX，取名字之前不先搜搜吗？不过还是主要是搜索引擎做的不好，加上国内对于计算机底层方面没有计算机应用方面火。所以还是推荐大家试着科学上网。
+如果你给我说不能翻墙，那我只能说，国内搜索引擎都什么呀！有个B站UP主叫LEX，取名字之前不先搜搜吗？不过主要还是搜索引擎做的不好，加上国内对于计算机底层方面没有计算机应用方面火。所以还是推荐大家试着科学上网。
 
 然后就是这个是linux/unix上的，双系统走一波。
 
@@ -82,12 +82,12 @@ db_port : 1099
 #define INTEGER 7
 ```
 
-然后定义`scanner.l`
+然后定义`scanner.l`，这里有一个坑，`%{ %}`不要写成了`%{ }%`。
 
 ```lex
 %{
     #include "scanner.h"
-}%
+%}
 
 %%
 
@@ -111,7 +111,7 @@ db_port : 1099
     这一函数在文件（或输入）的末尾调用。 如果函数的返回值是1，就停止解析。
 */
 
-int yywarp(void) {
+int yywrap(void) {
     return 1;
 }
 ```
@@ -172,3 +172,15 @@ int main(void) {
 然后`gcc scanner.c lex.yy.c -o scanner`
 
 运行代码`./scanner < config.in`
+
+最终结果：
+```
+1
+db_type is set to myset
+2
+db_name is set to testdate
+3
+db_table_prefix is set to test_
+4
+db_port is set to 1099
+```
